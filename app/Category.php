@@ -10,7 +10,7 @@ class Category extends Model
         'name',
     ];
     public function products(){
-        return $this-><('App\Product');
+        return $this->hasMany('App\Product');
     }
 
 }
