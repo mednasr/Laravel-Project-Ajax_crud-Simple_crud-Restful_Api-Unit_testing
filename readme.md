@@ -4,8 +4,14 @@ Asynchronous actions on a Laravel resource controller. For step by step instruct
 
 ## Installation
 
-
+Clone the repo
 ```
+git clone https://github.com/mednasr/Laravel_Project.git
+```
+
+Move to the newly created folder and install all dependencies:
+```
+cd Laravel_Project
 composer install
 ```
 
@@ -13,10 +19,12 @@ Create a new database, for example with phpMyAdmin. Then open the .env.example f
 ```
 php artisan migrate
 ```
+
 Now fill the tables:
 ```
 php artisan db:seed
 ```
+
 Finally, generate the application key 
 ```
 php artisan key:generate
