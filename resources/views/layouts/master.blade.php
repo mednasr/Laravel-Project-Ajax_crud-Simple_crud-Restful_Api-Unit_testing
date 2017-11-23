@@ -26,7 +26,7 @@
 
 
 </head>
-<body style="background-color: white;v">
+<body style="background-color: white;">
 @include('partial.header')
 
 

@@ -16,7 +16,7 @@
                 <th>Name</th>
                 <th>Created at</th>
                 <th>Updated at</th>
-
+                <th>Products</th>
                 <th class="text-center">Actions</th>
             </tr>
             </thead>
@@ -27,9 +27,12 @@
                     <td class="text-center">{{$category->id}}</td>
                     <td>{{$category->name}}</td>
                     <td>{{$category->created_at}}</td>
-                    <td>{{$category->updated_at}}</td>
-
-
+                    <td>{{$category->updated_at}}
+                    <td> @forelse($category->products as $product)
+                            <a href="{{route('product.show',$product->id)}}">     {{$product->name}}<br></a>
+                    @empty
+                    @endforelse
+                    </td>
                     <td class="td-actions text-right">
                         <form action="{{route('category.destroy',$category)}}" method="post" >
                         <a type="button" rel="tooltip" title="View Detail" class="btn btn-info btn-simple btn-xs" href="{{route('category.show',$category->id)}}">   <i class="fa fa-user"></i>  </a>

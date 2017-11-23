@@ -1,4 +1,5 @@
-@extends('layouts.master')
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,6 +9,7 @@
     <meta name="author" content="">
 
     <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('images/favicon.jpg') }}">
 
     <!-- CSFR token for ajax call -->
     <meta name="_token" content="{{ csrf_token() }}"/>
@@ -21,7 +23,10 @@
     <!-- icheck checkboxes -->
     <link rel="stylesheet" href="{{ asset('icheck/square/yellow.css') }}">
     {{-- <link rel="stylesheet" href="https://raw.githubusercontent.com/fronteed/icheck/1.x/skins/square/yellow.css"> --}}
+    <link  href={{asset('assets/css/material-kit.css')}} rel="stylesheet"/>
 
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href={{asset('assets/css/demo.css')}} rel="stylesheet" />
     <!-- toastr notifications -->
     {{-- <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
@@ -66,6 +71,67 @@
 </head>
 
 <body>
+<nav class="navbar navbar-fixed-top	" role="navigation" style="background-color: #0ab1fc;color: white">
+
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mohamed hedi Nasr</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="{{ route('home') }}">Products list</a></li>
+                <li><a href="{{ route('product.index') }}">Manage products</a></li>
+                <li><a href="{{ route('category.index') }}">Manage Categories</a></li>
+                <li><a href="{{ route('posts.index') }}">Ajax Crud</a></li>
+                @if(!Auth::check())
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
+                @endif
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    <li>
+
+                    </li>
+                @endif
+
+
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}
+                            <i class="material-icons"></i>
+
+
+                            <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                            <li class="divider"></li>
+
+                            <li> <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form> </li>
+
+                        </ul>
+                    </li>
+                @endif
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
     <div class="col-md-8 col-md-offset-2">
         <h2 class="text-center">Manage Posts</h2>
         <br />
@@ -101,12 +167,12 @@
                                     <td class="text-center"><input type="checkbox" class="published" id="" data-id="{{$post->id}}" @if ($post->is_published) checked @endif></td>
                                     <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->updated_at)->diffForHumans() }}</td>
                                     <td>
-                                        <button class="show-modal btn btn-success btn-sm " data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
-                                        <span class="glyphicon glyphicon-eye-open "></span> Show</button>
-                                        <button class="edit-modal btn btn-info btn-sm" data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
+                                        <button class="show-modal btn btn-success btn-xs" data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
+                                        <span class="glyphicon glyphicon-eye-open"></span> Show</button>
+                                        <button class="edit-modal btn btn-info btn-xs" data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
                                         <span class="glyphicon glyphicon-edit"></span> Edit</button>
-                                        <button class="delete-modal btn btn-danger btn-sm" data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
-                                        <span class="glyphicon glyphicon-trash "></span> Delete</button>
+                                        <button class="delete-modal btn btn-danger btn-xs" data-id="{{$post->id}}" data-title="{{$post->title}}" data-content="{{$post->content}}">
+                                        <span class="glyphicon glyphicon-trash"></span> Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
