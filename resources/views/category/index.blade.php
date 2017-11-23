@@ -39,10 +39,12 @@
 
                         <a type="button" rel="tooltip" title="Edit Profile" class="btn btn-success btn-simple btn-xs" href="{{route('category.edit',$category)}}">  <i class="fa fa-edit"></i></a>
 
-
+                            @if (count($category->products) == 0)
                             <input type="hidden" name="_method" value="DELETE">
                             {{csrf_field()}}
                             <button type="submit" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" ><i class="fa fa-times"></i></button>
+                            @endif
+
                         </form>
 
 
