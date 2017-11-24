@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::group(['middleware' => ['auth']], function() {
 Route::resource('category','CategoryController');
 Route::resource('product','ProductController');
 
@@ -35,3 +35,4 @@ Route::get('/remove-from-cart/{id}', 'UserController@removeProduct')->name('remo
 Route::resource('posts','PostsController');
 Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'PostsController@changeStatus'));
 
+});
